@@ -1,0 +1,38 @@
+# @param {Integer[]} nums1
+# @param {Integer} m
+# @param {Integer[]} nums2
+# @param {Integer} n
+# @return {Void} Do not return anything, modify nums1 in-place instead.
+def merge(nums1, m, nums2, n)
+  i = m - 1
+  j = n - 1
+  k = m + n - 1
+
+  while i >= 0 && j >= 0
+    if nums1[i] > nums2[j]
+      nums1[k] = nums1[i]
+      nums1[i] = nil
+      i -= 1
+      k -= 1
+    elsif nums1[i] < nums2[j]
+      nums1[k] = nums2[j]
+      nums2[j] = nil
+      j -= 1
+      k -= 1
+    else
+      nums1[k] = nums1[i]
+      nums1[k - 1] = nums2[j]
+      nums2[j] = nil
+      i -= 1
+      j -= 1
+      k -= 2
+    end
+  end
+
+  while j >= 0
+    nums1[j] = nums2[j]
+    j -= 1
+  end
+
+  nil
+end
